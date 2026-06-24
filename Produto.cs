@@ -72,7 +72,6 @@ public class Produto
         string valorSet = string.Join(", ", camposAtualizar);
         string sqlFinal = $"UPDATE Estoque SET {valorSet} WHERE ID = @ID";
 
-        // Agora enviamos o SQL completo e a lista de parâmetros para a sua classe de banco
         await Estoque.AtualizarProdutoAsync(sqlFinal, id, nome, quantidade, preco);
     }
 

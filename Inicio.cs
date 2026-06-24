@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 
 namespace controle_estoque;
 
@@ -53,22 +55,16 @@ public class Inicio
                         Console.ResetColor();
                     }
 
-                    if (nome != "" && quantidade != 0 && preco != 0)
-                    {
-                        Produto novoProduto = new Produto();
-                        novoProduto.Nome = nome;
-                        novoProduto.Quantidade = quantidade;
-                        novoProduto.Preco = preco;
+                    Produto novoProduto = new Produto();
+                    novoProduto.Nome = nome;
+                    novoProduto.Quantidade = quantidade;
+                    novoProduto.Preco = preco;
 
-                        await novoProduto.CadastrarProduto();
+                    await novoProduto.CadastrarProduto();
 
-                        Json json = new controle_estoque.Json();
-                        json.SalvarProdutoAtual(novoProduto);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Erro ao cadastrar produto, tente novamente!");
-                    }
+                    Json json = new controle_estoque.Json();
+                    json.SalvarProdutoAtual(novoProduto);
+                    
                     break;
 
                 case 2:
@@ -86,14 +82,42 @@ public class Inicio
 
                 case 4:
                     Console.WriteLine("Busque o produto que deseja alterar e digite seu ID abaixo:");
-                    int idProd = Convert.ToInt32(Console.ReadLine());
+                    int idProd;
+                    while (!int.TryParse(Console.ReadLine(), out idProd) || idProd <= 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("Quantidade inválida! Digite um número inteiro maior que 0: ");
+                        Console.ResetColor();
+                    }
 
-                    Console.WriteLine("Novo Nome:");
+                    Console.WriteLine("Nome:");
                     string nomeAtual = Console.ReadLine() ?? "";
-                    Console.WriteLine("Nova Quantidade:");
-                    int quantidadeAtual = int.TryParse(Console.ReadLine(), out int s) ? s : 0;
-                    Console.WriteLine("Novo Preço:");
-                    double precoAtual = double.TryParse(Console.ReadLine(), out double r) ? r : 0;
+                    while (string.IsNullOrWhiteSpace(nomeAtual))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("O nome não pode ser vazio. Digite novamente: ");
+                        Console.ResetColor();
+                        nomeAtual = Console.ReadLine() ?? "";
+                    }
+
+                    Console.WriteLine("Quantidade:");
+                    int quantidadeAtual;
+                    while (!int.TryParse(Console.ReadLine(), out quantidadeAtual) || quantidadeAtual <= 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("Quantidade inválida! Digite um número inteiro maior que 0: ");
+                        Console.ResetColor();
+                    }
+
+                    Console.WriteLine("Preço:");
+                    double precoAtual;
+                    while (!double.TryParse(Console.ReadLine(), out precoAtual) || precoAtual <= 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("Preço inválido! Digite um valor numérico maior que 0: ");
+                        Console.ResetColor();
+                    }
+
 
                     Produto produtoAtualizar = new Produto();
                     await produtoAtualizar.AtualizarProduto(idProd, nomeAtual, quantidadeAtual, precoAtual);
@@ -108,7 +132,6 @@ public class Inicio
                     break;
 
                 case 0:
-                    // 3. Se digitar 0, mudamos a variável para false e o loop quebra
                     continuar = false;
                     Console.WriteLine("Saindo do sistema... Até logo!");
                     break;
@@ -123,7 +146,7 @@ public class Inicio
             {
                 Console.WriteLine("\nPressione qualquer tecla para voltar ao menu principal...");
                 Console.ReadKey();
-                Console.Clear(); // Limpa o console para o menu não ficar empilhado lá embaixo
+                Console.Clear(); 
             }
 
         }
