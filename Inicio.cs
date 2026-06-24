@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace controle_estoque;
+namespace controle_estoque; 
 
 public class Inicio
 {

@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text.Json;
 
-namespace controle_estoque;
+namespace controle_estoque; 
 
 
 public class Json

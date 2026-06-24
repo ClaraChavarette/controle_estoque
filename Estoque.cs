@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 
-public static class Estoque
+public static class Estoque 
 {
     private static string DbPath = "estoque.db";
     private static string ConexaoString = $"Data Source={DbPath}";
