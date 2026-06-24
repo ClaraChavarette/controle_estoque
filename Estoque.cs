@@ -6,7 +6,7 @@ public static class Estoque
 {
     private static string DbPath = "estoque.db";
     private static string ConexaoString = $"Data Source={DbPath}";
-
+     
     public static async Task InicializarBancoAsync()
     {
         await using var conn = new SqliteConnection(ConexaoString);

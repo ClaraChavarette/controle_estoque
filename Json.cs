@@ -7,7 +7,7 @@ namespace controle_estoque;
 
 public class Json
 {
-
+     
     public void SalvarProdutoAtual(Produto produto)
     {
         string jsonString = JsonSerializer.Serialize(produto);

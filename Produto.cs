@@ -43,7 +43,7 @@ public class Produto
     public async Task AtualizarProduto(int id, string nome, int quantidade, double preco)
     {
         List<string> camposAtualizar = new List<string>();
-
+         
         if (id <= 0)
         {
             Console.WriteLine("Erro: Digite o ID de um produto para atualiza-lo.");

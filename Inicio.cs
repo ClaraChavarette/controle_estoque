@@ -90,34 +90,12 @@ public class Inicio
                         Console.ResetColor();
                     }
 
-                    Console.WriteLine("Nome:");
+                    Console.WriteLine("Novo Nome:");
                     string nomeAtual = Console.ReadLine() ?? "";
-                    while (string.IsNullOrWhiteSpace(nomeAtual))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("O nome não pode ser vazio. Digite novamente: ");
-                        Console.ResetColor();
-                        nomeAtual = Console.ReadLine() ?? "";
-                    }
-
-                    Console.WriteLine("Quantidade:");
-                    int quantidadeAtual;
-                    while (!int.TryParse(Console.ReadLine(), out quantidadeAtual) || quantidadeAtual <= 0)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("Quantidade inválida! Digite um número inteiro maior que 0: ");
-                        Console.ResetColor();
-                    }
-
-                    Console.WriteLine("Preço:");
-                    double precoAtual;
-                    while (!double.TryParse(Console.ReadLine(), out precoAtual) || precoAtual <= 0)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("Preço inválido! Digite um valor numérico maior que 0: ");
-                        Console.ResetColor();
-                    }
-
+                    Console.WriteLine("Nova Quantidade:");
+                    int quantidadeAtual = int.TryParse(Console.ReadLine(), out int s) ? s : 0;
+                    Console.WriteLine("Novo Preço:");
+                    double precoAtual = double.TryParse(Console.ReadLine(), out double r) ? r : 0;
 
                     Produto produtoAtualizar = new Produto();
                     await produtoAtualizar.AtualizarProduto(idProd, nomeAtual, quantidadeAtual, precoAtual);
