@@ -3,7 +3,7 @@ namespace controle_estoque;
 
 public class Inicio
 {
-    static void Main(string[] args)
+    static void Main(string[] args) 
     {
         Console.WriteLine("Digite o número do que deseja realizar:");
         Console.WriteLine("1. Cadastrar Produto");
